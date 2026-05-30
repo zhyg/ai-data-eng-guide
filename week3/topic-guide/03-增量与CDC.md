@@ -20,21 +20,21 @@
 
 | 概念 | 大白话 | 典型例子 |
 | :--- | :--- | :--- |
-| `cursor` | 下次从哪继续读 | `updated_at=10:00` 后继续 |
-| `watermark` | 已确认处理到哪 | 09:55 之前都算已处理 |
-| `checkpoint` | 状态存在哪里 | 状态表、文件、资产 metadata |
-| `dedupe key` | 判断两条输入是不是同一件事 | `event_id` |
-| `idempotency key` | 判断同一次写入是否该跳过 | `batch_id + 主键` |
+| cursor | 下次从哪继续读 | updated_at=10:00 后继续 |
+| watermark | 已确认处理到哪 | 09:55 之前都算已处理 |
+| checkpoint | 状态存在哪里 | 状态表、文件、资产 metadata |
+| dedupe key | 判断两条输入是不是同一件事 | event_id |
+| idempotency key | 判断同一次写入是否该跳过 | batch_id + 主键 |
 
 游标字段各有坑：
 
 | 字段 | 适合场景 | 风险 |
 | :--- | :--- | :--- |
-| `updated_at` | 常规表增量 | 可能没更新、被回写、粒度太粗 |
-| `event_time` | 事件发生时间 | 迟到和乱序会打穿窗口 |
-| `sequence_id` | 单调业务序号 | 依赖来源真的保证单调 |
-| `LSN` | 数据库日志位置 | 是日志位置，不等于业务事实 |
-| `offset` | 消息或日志读取位置 | 是读取位置，不等于数据事实 |
+| updated_at | 常规表增量 | 可能没更新、被回写、粒度太粗 |
+| event_time | 事件发生时间 | 迟到和乱序会打穿窗口 |
+| sequence_id | 单调业务序号 | 依赖来源真的保证单调 |
+| LSN | 数据库日志位置 | 是日志位置，不等于业务事实 |
+| offset | 消息或日志读取位置 | 是读取位置，不等于数据事实 |
 
 CDC 要讲清边界：
 
@@ -45,13 +45,13 @@ CDC 要讲清边界：
 | 读 WAL 就天然正确 | 客户端仍要去重、幂等写入、记录状态 |
 | 配上 Kafka 就 exactly-once | 需要严格条件，不能轻易承诺端到端 exactly-once |
 
-迟到、重复、乱序的动作也要留证据：`event_time`、`observed_at`、`source_id`、`reason_code`、原始事件指针、目标表 key。
+迟到、重复、乱序的动作也要留证据：event_time、observed_at、source_id、reason_code、原始事件指针、目标表 key。
 
 ## 避坑提醒
 
-- 单靠 `updated_at`：它常见，但不是万能游标。
+- 单靠 updated_at：它常见，但不是万能游标。
 - 把「读到哪」当成「写完到哪」：checkpoint 不能先于写入事实前进。
-- 只看 `offset` / `LSN`：它们是位置，不是业务正确性的证明。
+- 只看 offset / LSN：它们是位置，不是业务正确性的证明。
 - 遇到重复就直接删：可能删掉真实多版本，要先定义去重规则。
 - 轻易承诺 exactly-once：更稳妥的目标是 **at-least-once + 幂等写入 + 去重 + 可回放**。
 
