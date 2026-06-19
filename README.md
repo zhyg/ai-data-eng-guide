@@ -9,6 +9,15 @@
 @guide/week5 目录中的 pdf 是本周课程的讲义，index.txt 是课程的目录。仔细阅读这个 pdf ，根据 index.txt 把 pdf 内容整理成多个 markdown 文件，一个文件对应一个index。 文件保存到 topic 目录下。
 
 
+@week7 目录中的 pdf 是本周课程的讲义，index.txt 是课程的目录。仔细阅读这个 pdf ，根据 index.txt 把 pdf 内容整理成多个 markdown 文件，一个文件对应一个index, 文件名和对应的index保持一致。 文件保存到 topic 目录下。
+
+
+
+@week6 目录中的 pdf 是本周课程讲义，index.txt 是课程目录。topic 目录下是根据讲义和课程目录抽出的每节的内容。仔细检查下抽出的内容是否有遗漏或者不正确的地方。
+
+
+@week7/manuscripts/6. 非结构化数据工程实践.md 是这一章的字幕内容，根据字幕内容修正  @week7/topic/6.非结构化数据工程实践.md ，topic内容避免出现代码。
+
 @guide/week5 根据 topic 目录下每个topic的内容，写一份面向数据工程初学者的导学，要求语言简练，尽量避免使用过多的专业术语。保存在 topic-guide 目录下。所有导学都遵循统一风格：一句话理解 → 生活类比 → 关键概念表格 → 避坑提醒 → 一句话总结，尽量避免堆砌专业术语。
 
 
