@@ -26,5 +26,5 @@
 /write @week5/topic-guide/  去掉文章中的 AI 味
 
 
-使用飞书cli在知识库中的 ai-data-eng-guide 目录下新建子目录 week03。@week3/topic-guide 把下面的文档上传到刚才建立的 week03 目录下。 
+使用飞书cli在知识库中的 ai-data-eng-guide 目录下新建子目录 week06。把 week6/topic-guide 目录下的文档上传到刚才新建的目录下。 
 
