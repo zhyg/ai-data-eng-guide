@@ -1,0 +1,6 @@
+1. OpenTelemetry + OpenInference 协议基础
+2. Span 级追踪设计
+3. 实时监控仪表盘
+4. 告警与 SLO
+5. Bad Case 复盘标准化
+6. OpenTelemetry 与 Tracing 全链路可观测性实践
